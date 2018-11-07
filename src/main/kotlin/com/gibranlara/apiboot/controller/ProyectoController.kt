@@ -30,14 +30,7 @@ class  ProyectoController {
     fun getProyectoById(@PathVariable id:ObjectId) : Proyecto = proyectoService.findById(id)
 
     @PostMapping("/")
-    fun createProyecto(proyecto: Proyecto): Proyecto {
-        return proyectoService.createProyecto(proyecto)
-    }
-
-    @RequestMapping("/", method = arrayOf(RequestMethod.POST))
-    fun createProyeto2(@RequestBody proyecto: Proyecto): Proyecto{
-        return proyectoService.createProyecto(proyecto)
-    }
+    fun createProyecto(@RequestBody proyecto: Proyecto): Proyecto = proyectoService.createProyecto(proyecto)
 
     @PutMapping("/")
     fun updateProyecto(proyecto: Proyecto) = proyectoService.updateProyecto(proyecto)
