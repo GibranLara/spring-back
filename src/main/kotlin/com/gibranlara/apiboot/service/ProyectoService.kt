@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service
 
 interface ProyectoService {
     // Aquí pueden ir las funciones del servicio y abajo en la implementación implementarlas
-    fun findBy_id(id: ObjectId) : Proyecto
+    fun findById(id: ObjectId) : Proyecto
+    fun findAll(): List<Proyecto>
+    fun createProyecto(proyecto: Proyecto): Proyecto
+    fun updateProyecto(proyecto: Proyecto)
+    fun deleteProyecto(id: ObjectId)
 }
 
 @Service("proyectoService")
@@ -16,6 +20,18 @@ class ProyectoServiceImpl : ProyectoService {
     @Autowired
     lateinit var proyectoRepository: ProyectoRepository
 
-    override fun findBy_id(id: ObjectId): Proyecto = proyectoRepository.findBy_id(id)
+    //Obtener un proyecto
+    override fun findById(id: ObjectId): Proyecto = proyectoRepository.findById(id)
 
+    //Obtener todos los proyectos
+    override fun findAll(): List<Proyecto> = proyectoRepository.findAll()
+
+    //Crear un proyecto
+    override fun createProyecto(proyecto: Proyecto): Proyecto = proyectoRepository.insert(proyecto)
+
+    //Actualizar un proyecto
+    override fun updateProyecto(proyecto: Proyecto) = proyectoRepository.save(proyecto)
+
+    //Eliminar un proyecto
+    override fun deleteProyecto(id:ObjectId) = proyectoRepository.deleteById(id)
 }

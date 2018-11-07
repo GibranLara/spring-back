@@ -6,5 +6,9 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 interface ProyectoRepository : MongoRepository<Proyecto, String> {
-    fun findBy_id(_id:ObjectId) : Proyecto
+    fun findById(id: ObjectId): Proyecto
+    override fun findAll(): List<Proyecto>
+    fun insert(proyecto: Proyecto): Proyecto
+    fun save(proyecto: Proyecto)
+    fun deleteById(id: ObjectId)
 }

@@ -1,5 +1,6 @@
 package com.gibranlara.apiboot.model
 
+import com.fasterxml.jackson.annotation.JsonCreator
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.TypeAlias
@@ -9,10 +10,8 @@ import org.springframework.data.mongodb.core.mapping.Document
 @TypeAlias("proyecto")
 data class Proyecto (
         @Id
-        val _id: ObjectId,
-        val nombre: String,
-        val area: String,
-        val fecha:String
+        var id: String?,
+        var nombre: String,
+        var area: String,
+        var fecha:String
 )
-{
-}
