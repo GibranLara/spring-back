@@ -1,5 +1,6 @@
 package com.gibranlara.apiboot.service
 
+import com.gibranlara.apiboot.model.NewProyecto
 import com.gibranlara.apiboot.model.Proyecto
 import com.gibranlara.apiboot.repository.ProyectoRepository
 import org.bson.types.ObjectId
@@ -10,8 +11,8 @@ interface ProyectoService {
     // Aquí pueden ir las funciones del servicio y abajo en la implementación implementarlas
     fun findById(id: ObjectId) : Proyecto
     fun findAll(): List<Proyecto>
-    fun createProyecto(proyecto: Proyecto): Proyecto
-    fun updateProyecto(proyecto: Proyecto)
+    fun createProyecto(newproyecto: NewProyecto): NewProyecto
+    fun updateProyecto(proyecto: Proyecto): Proyecto
     fun deleteProyecto(id: ObjectId)
 }
 
@@ -27,10 +28,10 @@ class ProyectoServiceImpl : ProyectoService {
     override fun findAll(): List<Proyecto> = proyectoRepository.findAll()
 
     //Crear un proyecto
-    override fun createProyecto(proyecto: Proyecto): Proyecto = proyectoRepository.insert(proyecto)
+    override fun createProyecto(newProyecto: NewProyecto): NewProyecto = proyectoRepository.insert(newProyecto)
 
     //Actualizar un proyecto
-    override fun updateProyecto(proyecto: Proyecto) = proyectoRepository.save(proyecto)
+    override fun updateProyecto(proyecto: Proyecto):Proyecto = proyectoRepository.save(proyecto)
 
     //Eliminar un proyecto
     override fun deleteProyecto(id:ObjectId) = proyectoRepository.deleteById(id)

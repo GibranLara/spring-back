@@ -1,5 +1,6 @@
 package com.gibranlara.apiboot.controller
 
+import com.gibranlara.apiboot.model.NewProyecto
 import com.gibranlara.apiboot.model.Proyecto
 import com.gibranlara.apiboot.service.ProyectoService
 import org.bson.types.ObjectId
@@ -30,10 +31,10 @@ class  ProyectoController {
     fun getProyectoById(@PathVariable id:ObjectId) : Proyecto = proyectoService.findById(id)
 
     @PostMapping("/")
-    fun createProyecto(@RequestBody proyecto: Proyecto): Proyecto = proyectoService.createProyecto(proyecto)
+    fun createProyecto(@RequestBody newProyecto: NewProyecto): NewProyecto = proyectoService.createProyecto(newProyecto)
 
     @PutMapping("/")
-    fun updateProyecto(proyecto: Proyecto) = proyectoService.updateProyecto(proyecto)
+    fun updateProyecto(@RequestBody proyecto: Proyecto) = proyectoService.updateProyecto(proyecto)
 
     @DeleteMapping("/proyecto/{id}")
     fun deleteProyecto(@PathVariable id: ObjectId) = proyectoService.deleteProyecto(id)
