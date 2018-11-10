@@ -1,6 +1,7 @@
 package com.gibranlara.apiboot.controller
 
 import com.gibranlara.apiboot.model.NewProyecto
+import com.gibranlara.apiboot.model.NewReunion
 import com.gibranlara.apiboot.model.Proyecto
 import com.gibranlara.apiboot.service.ProyectoService
 import org.bson.types.ObjectId
@@ -38,8 +39,5 @@ class  ProyectoController {
 
     @DeleteMapping("/proyecto/{id}")
     fun deleteProyecto(@PathVariable id: ObjectId) = proyectoService.deleteProyecto(id)
-
-
-
 }
 

@@ -13,3 +13,7 @@ interface ProyectoRepository : MongoRepository<Proyecto, String> {
     fun save(proyect: Proyecto): Proyecto
     fun deleteById(id: ObjectId)
 }
+
+//interface UpdateProyectoRepository: MongoRepository<UpdateProyecto, String>{
+//
+//}
