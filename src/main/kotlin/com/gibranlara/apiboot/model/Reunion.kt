@@ -8,8 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
 data class Reunion(
-        @Id
-        val id: String,
         val objetivo: String,
         val fecha: String,
         val participantes: List<Participante>?
@@ -17,11 +15,9 @@ data class Reunion(
 
 @Document
 data class NewReunion(
-        @Id
-        var id: String? = ObjectId().toHexString(),
-        var objetivo: String = "",
-        var fecha: String = "",
-        var participantes: List<NewParticipante>? = null
+        var objetivo: String,
+        var fecha: String,
+        var participantes: List<NewParticipante>?
 ) {
 }
 
