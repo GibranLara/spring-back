@@ -25,6 +25,7 @@ class  ProyectoController {
     @Autowired
     lateinit var proyectoService : ProyectoService
 
+//    @CrossOrigin(origins = arrayOf("http://localhost:4873"))
     @GetMapping("/all")
     fun getProyectos(): List<Proyecto> = proyectoService.findAll();
 
@@ -38,6 +39,9 @@ class  ProyectoController {
     fun updateProyecto(@RequestBody proyecto: Proyecto) = proyectoService.updateProyecto(proyecto)
 
     @DeleteMapping("/proyecto/{id}")
-    fun deleteProyecto(@PathVariable id: ObjectId) = proyectoService.deleteProyecto(id)
+    fun deleteProyecto(@PathVariable id: ObjectId) {
+        println(id)
+        proyectoService.deleteProyecto(id)
+    }
 }
 

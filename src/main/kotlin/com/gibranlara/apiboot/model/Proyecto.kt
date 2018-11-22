@@ -6,6 +6,7 @@ import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.TypeAlias
 import org.springframework.data.mongodb.core.mapping.Document
+import java.sql.Date
 
 // Los atributos con tipo de dato val son INMUTABLES, es decir de solo lectura, los de tipo
 // Los atributos con tipo de dato var son VARIABLE, ed decir se pueden sobreescribir datos.
@@ -16,7 +17,7 @@ data class Proyecto (
         val id: String,
         val nombre: String,
         val area: String,
-        val fecha:String,
+        val fecha: String,
         val reuniones: List<Reunion>?
 ){}
 

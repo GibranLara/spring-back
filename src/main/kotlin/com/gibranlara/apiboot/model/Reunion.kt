@@ -18,14 +18,4 @@ data class NewReunion(
         var objetivo: String,
         var fecha: String,
         var participantes: List<NewParticipante>?
-) {
-}
-
-
-//data class UpdateReunion(
-//        @Id
-//        val id: ObjectId,
-//        val objetivo: String,
-//        val fecha:String,
-//        val participantes: List<UpdateParticipante>?
-//){}
+) {}
