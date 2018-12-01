@@ -25,11 +25,11 @@ data class Proyecto (
 @TypeAlias("newproyecto")
 data class NewProyecto (
         @Id
-        val id: String?,//Es posiblemente nulo porqué se crea automáticamente
-        var nombre: String,
-        var area: String,
-        var fecha:String,
-        var reuniones: List<NewReunion>?
+        val id: String = ObjectId().toHexString(),
+        val nombre: String,
+        val area: String,
+        val fecha:String,
+        val reuniones: List<NewReunion>?
 ){}
 
 //@Document(collection = "proyectos")

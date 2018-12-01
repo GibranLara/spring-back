@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
 data class Participante(
+        val nomina: Int,
         val nombre: String,
         val rol: String?,//Puede ser vacío porqué en la creación también lo pude ser
         val area: String,
@@ -14,6 +15,7 @@ data class Participante(
 
 @Document
 data class NewParticipante(
+        var nomina: Int,
         var nombre: String,
         var rol: String?,
         var area: String,

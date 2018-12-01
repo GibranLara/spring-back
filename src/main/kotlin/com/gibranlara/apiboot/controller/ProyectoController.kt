@@ -40,7 +40,6 @@ class  ProyectoController {
 
     @DeleteMapping("/proyecto/{id}")
     fun deleteProyecto(@PathVariable id: ObjectId) {
-        println(id)
         proyectoService.deleteProyecto(id)
     }
 }
