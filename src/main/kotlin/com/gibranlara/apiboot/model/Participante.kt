@@ -10,7 +10,7 @@ data class Participante(
         val nombre: String,
         val rol: String?,//Puede ser vacío porqué en la creación también lo pude ser
         val area: String,
-        val firma: String
+        var firma: String?
 ) {}
 
 @Document
@@ -19,7 +19,7 @@ data class NewParticipante(
         var nombre: String,
         var rol: String?,
         var area: String,
-        var firma: String
+        var firma: String?
 ) {}
 
 //data class UpdateParticipante(
