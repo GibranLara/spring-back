@@ -11,6 +11,12 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
 import java.io.File
 import java.util.*
+import org.springframework.data.repository.support.PageableExecutionUtils
+import org.springframework.data.domain.Page
+import sun.security.krb5.internal.KDCOptions.with
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Query
 
 
 // La anotación @RequestMapping especifica la URL base que el controlador manejará, por lo que cualquier solicitud al host que comience con
@@ -28,7 +34,24 @@ class  ProyectoController {
     @Autowired
     lateinit var proyectoService : ProyectoService
 
+    @Autowired
+    lateinit var mongoTemplate:MongoTemplate
+
     // @CrossOrigin(origins = arrayOf("http://localhost:4873"))
+    @GetMapping ("/paginados")
+    fun getProyectosPaginados() {
+        val pageable = PageRequest.of(0, 2)
+
+        val proyectosQueryDinamica = Query().with(pageable)
+        // Add criteria's according to your wish to patientsDynamicQuery
+        val proyectosFiltrados = mongoTemplate.find(proyectosQueryDinamica, Proyecto::class.java, "proyectos")
+        val proyectoPagina = PageableExecutionUtils.getPage(
+                proyectosFiltrados,
+                pageable
+        ) { mongoTemplate.count(proyectosQueryDinamica, Proyecto::class.java) }
+
+        println(proyectoPagina)
+    }
 
     // Retornar todos los proyectos
     @GetMapping("/all")

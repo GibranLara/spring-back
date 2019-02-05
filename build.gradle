@@ -47,6 +47,7 @@ configurations {
 }
 
 dependencies {
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
 	compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
 	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 	compile "com.fasterxml.jackson.module:jackson-module-kotlin"
