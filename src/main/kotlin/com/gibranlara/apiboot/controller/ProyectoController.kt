@@ -34,23 +34,10 @@ class  ProyectoController {
     @Autowired
     lateinit var proyectoService : ProyectoService
 
-    @Autowired
-    lateinit var mongoTemplate:MongoTemplate
-
     // @CrossOrigin(origins = arrayOf("http://localhost:4873"))
     @GetMapping ("/paginados")
     fun getProyectosPaginados() {
-        val pageable = PageRequest.of(0, 2)
-
-        val proyectosQueryDinamica = Query().with(pageable)
-        // Add criteria's according to your wish to patientsDynamicQuery
-        val proyectosFiltrados = mongoTemplate.find(proyectosQueryDinamica, Proyecto::class.java, "proyectos")
-        val proyectoPagina = PageableExecutionUtils.getPage(
-                proyectosFiltrados,
-                pageable
-        ) { mongoTemplate.count(proyectosQueryDinamica, Proyecto::class.java) }
-
-        println(proyectoPagina)
+        proyectoService.pagedProyectos()
     }
 
     // Retornar todos los proyectos
