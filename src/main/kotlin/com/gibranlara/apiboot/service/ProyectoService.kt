@@ -39,7 +39,7 @@ class ProyectoServiceImpl : ProyectoService {
                 proyectosFiltrados,
                 pageable
         ) { mongoTemplate.count(proyectosQueryDinamica, Proyecto::class.java) }
-        println(proyectoPagina)
+        println(proyectosFiltrados)
     }
 
     //Obtener un proyecto
