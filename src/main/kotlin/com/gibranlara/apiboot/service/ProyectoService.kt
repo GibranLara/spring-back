@@ -18,7 +18,7 @@ interface ProyectoService {
     fun createProyecto(newproyecto: NewProyecto): NewProyecto
     fun updateProyecto(proyecto: Proyecto): Proyecto
     fun deleteProyecto(id: ObjectId)
-    fun pagedProyectos();
+    fun pagedProyectos(page:Int, size:Int): List<Proyecto>;
 }
 
 @Service("proyectoService")
@@ -29,8 +29,8 @@ class ProyectoServiceImpl : ProyectoService {
     @Autowired
     lateinit var mongoTemplate: MongoTemplate
 
-    override fun pagedProyectos() {
-        val pageable = PageRequest.of(0, 2)
+    override fun pagedProyectos(page:Int, size:Int): List<Proyecto> {
+        val pageable = PageRequest.of(page, size)
 
         val proyectosQueryDinamica = Query().with(pageable)
         // Add criteria's according to your wish to patientsDynamicQuery
@@ -39,7 +39,7 @@ class ProyectoServiceImpl : ProyectoService {
                 proyectosFiltrados,
                 pageable
         ) { mongoTemplate.count(proyectosQueryDinamica, Proyecto::class.java) }
-        println(proyectosFiltrados)
+        return proyectosFiltrados
     }
 
     //Obtener un proyecto
