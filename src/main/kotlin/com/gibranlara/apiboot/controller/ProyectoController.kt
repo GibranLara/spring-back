@@ -36,7 +36,7 @@ class  ProyectoController {
 
     // @CrossOrigin(origins = arrayOf("http://localhost:4873"))
     @GetMapping ("/proyectospaginados", params = ["page", "size"])
-    fun getProyectosPaginados(@RequestParam("page")page:Int, @RequestParam("size")size:Int): List<Proyecto> {
+    fun getProyectosPaginados(@RequestParam("page")page:Int, @RequestParam("size")size:Int): Page<Proyecto> {
         return proyectoService.pagedProyectos(page, size)
     }
 

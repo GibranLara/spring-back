@@ -5,6 +5,7 @@ import com.gibranlara.apiboot.model.Proyecto
 import com.gibranlara.apiboot.repository.ProyectoRepository
 import org.bson.types.ObjectId
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Query
@@ -18,7 +19,7 @@ interface ProyectoService {
     fun createProyecto(newproyecto: NewProyecto): NewProyecto
     fun updateProyecto(proyecto: Proyecto): Proyecto
     fun deleteProyecto(id: ObjectId)
-    fun pagedProyectos(page:Int, size:Int): List<Proyecto>;
+    fun pagedProyectos(page:Int, size:Int): Page<Proyecto>;
 }
 
 @Service("proyectoService")
@@ -29,7 +30,7 @@ class ProyectoServiceImpl : ProyectoService {
     @Autowired
     lateinit var mongoTemplate: MongoTemplate
 
-    override fun pagedProyectos(page:Int, size:Int): List<Proyecto> {
+    override fun pagedProyectos(page:Int, size:Int): Page<Proyecto> {
         val pageable = PageRequest.of(page, size)
 
         val proyectosQueryDinamica = Query().with(pageable)
@@ -39,7 +40,7 @@ class ProyectoServiceImpl : ProyectoService {
                 proyectosFiltrados,
                 pageable
         ) { mongoTemplate.count(proyectosQueryDinamica, Proyecto::class.java) }
-        return proyectosFiltrados
+        return proyectoPagina
     }
 
     //Obtener un proyecto
