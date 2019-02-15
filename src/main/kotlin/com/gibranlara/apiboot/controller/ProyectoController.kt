@@ -35,9 +35,9 @@ class  ProyectoController {
     lateinit var proyectoService : ProyectoService
 
     // @CrossOrigin(origins = arrayOf("http://localhost:4873"))
-    @GetMapping ("/proyectospaginados", params = ["page", "size"])
-    fun getProyectosPaginados(@RequestParam("page")page:Int, @RequestParam("size")size:Int): Page<Proyecto> {
-        return proyectoService.pagedProyectos(page, size)
+    @GetMapping ("/proyectospaginados", params = ["page", "size", "filter"])
+    fun getProyectosPaginados(@RequestParam("page")page:Int, @RequestParam("size")size:Int, @RequestParam("filter")filter:String): Page<Proyecto> {
+        return proyectoService.pagedProyectos(page, size, filter)
     }
 
     // Retornar todos los proyectos

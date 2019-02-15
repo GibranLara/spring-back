@@ -8,18 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.repository.support.PageableExecutionUtils
 import org.springframework.stereotype.Service
 
 interface ProyectoService {
     // Aquí pueden ir las funciones del servicio y abajo en la implementación implementarlas
-    fun findById(id: ObjectId) : Proyecto
+    fun findById(id: ObjectId): Proyecto
+
     fun findAll(): List<Proyecto>
     fun createProyecto(newproyecto: NewProyecto): NewProyecto
     fun updateProyecto(proyecto: Proyecto): Proyecto
     fun deleteProyecto(id: ObjectId)
-    fun pagedProyectos(page:Int, size:Int): Page<Proyecto>;
+    fun pagedProyectos(page: Int, size: Int, filter: String): Page<Proyecto>;
 }
 
 @Service("proyectoService")
@@ -30,11 +32,20 @@ class ProyectoServiceImpl : ProyectoService {
     @Autowired
     lateinit var mongoTemplate: MongoTemplate
 
-    override fun pagedProyectos(page:Int, size:Int): Page<Proyecto> {
+    override fun pagedProyectos(page: Int, size: Int, filter: String): Page<Proyecto> {
         val pageable = PageRequest.of(page, size)
 
         val proyectosQueryDinamica = Query().with(pageable)
         // Add criteria's according to your wish to patientsDynamicQuery
+        var criteria: Criteria = Criteria()
+        proyectosQueryDinamica.addCriteria(
+                criteria.orOperator(
+                        Criteria.where("nombre").regex(filter, "i"),
+                        Criteria.where("area").regex(filter, "i"),
+                        Criteria.where("fecha").regex(filter, "i")
+                )
+        )
+
         val proyectosFiltrados = mongoTemplate.find(proyectosQueryDinamica, Proyecto::class.java, "proyectos")
         val proyectoPagina = PageableExecutionUtils.getPage(
                 proyectosFiltrados,
@@ -53,8 +64,8 @@ class ProyectoServiceImpl : ProyectoService {
     override fun createProyecto(newProyecto: NewProyecto): NewProyecto = proyectoRepository.insert(newProyecto)
 
     //Actualizar un proyecto
-    override fun updateProyecto(proyecto: Proyecto):Proyecto = proyectoRepository.save(proyecto)
+    override fun updateProyecto(proyecto: Proyecto): Proyecto = proyectoRepository.save(proyecto)
 
     //Eliminar un proyecto
-    override fun deleteProyecto(id:ObjectId) = proyectoRepository.deleteById(id)
+    override fun deleteProyecto(id: ObjectId) = proyectoRepository.deleteById(id)
 }
