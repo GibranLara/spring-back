@@ -31,6 +31,7 @@ compileKotlin {
 		jvmTarget = "1.8"
 	}
 }
+
 compileTestKotlin {
 	kotlinOptions {
 		freeCompilerArgs = ["-Xjsr305=strict"]
@@ -46,7 +47,13 @@ configurations {
 	providedRuntime
 }
 
+war {
+	enabled = true
+	baseName = 'pases-lista'
+}
+
 dependencies {
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 	compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version" // Required for Kotlin integration
 	compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
