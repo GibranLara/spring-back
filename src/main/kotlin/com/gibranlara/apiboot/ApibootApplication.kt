@@ -8,16 +8,8 @@ import org.springframework.boot.runApplication
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
-class ApibootApplication : SpringBootServletInitializer() {
+class ApibootApplication
 
-    protected override fun configure(application: SpringApplicationBuilder) : SpringApplicationBuilder {
-        return application.sources(Application::class.java)
-    }
-
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            SpringApplication.run(ApibootApplication::class.java, *args)
-        }
-    }
+fun main(args: Array<String>) {
+    SpringApplication.run(ApibootApplication::class.java, *args)
 }
